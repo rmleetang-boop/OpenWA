@@ -22,6 +22,12 @@ Deploy the official OpenWA Gateway (Docker method) to the user's Fly.io app, wit
 - API command endpoints (/sendText etc.) only mount after QR scan — 404 before that is expected
 - Fly token stored at /app/openwa-deploy/.flytoken (flyctl in /root/.fly/bin)
 
+## Bug Fix (Jun 2026)
+- 502 reported: machine crash-looped (exit_code=1) — Chrome + WhatsApp Web too heavy for 1GB RAM
+- Fix: VM memory bumped to 2GB (`flyctl machine update --vm-memory 2048`); fly.toml updated to memory="2gb"
+- Verified: root URL returns 200 consistently (testing agent + 3 stability probes over 60s)
+- Regression test left at /app/backend/tests/test_openwa_gateway.py (user paused further testing-agent runs until they confirm)
+
 ## Backlog
 - P1: Webhook configuration (WA_WEBHOOK) if user wants inbound message forwarding
 - P2: Dedicated IPv4, custom domain
