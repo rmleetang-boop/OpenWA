@@ -1,0 +1,27 @@
+app = "openwa-app"
+primary_region = "jnb"
+
+[build]
+  image = "openwa/wa-automate:latest"
+
+[env]
+  WA_PORT = "2785"
+  WA_HOST = "0.0.0.0"
+  WA_IN_DOCKER = "true"
+  WA_SESSION_DATA_PATH = "/app/data"
+  WA_POPUP = "false"
+
+[mounts]
+  source = "openwa_data"
+  destination = "/app/data"
+
+[http_service]
+  internal_port = 2785
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
