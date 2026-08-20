@@ -13,7 +13,7 @@ primary_region = 'ams'
 
 [[mounts]]
   source = 'openwa_data'
-  destination = '/data'
+  destination = '/app/data'
   auto_extend_size_threshold = 80
   auto_extend_size_increment = '1GB'
   auto_extend_size_limit = '10GB'
