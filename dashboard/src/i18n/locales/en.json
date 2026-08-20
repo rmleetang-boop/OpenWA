@@ -380,6 +380,9 @@
     "selectSession": "Select session...",
     "session": "Session",
     "events": "Events",
+    "secret": "Signing secret",
+    "secretPlaceholder": "Paste the same secret used by your receiving service",
+    "secretHint": "Optional. Use this when the receiving service expects HMAC-signed webhook requests.",
     "available": "Available Events",
     "saveChanges": "Save Changes",
     "filters": {
