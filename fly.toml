@@ -19,7 +19,7 @@ primary_region = 'ams'
   auto_extend_size_limit = '10GB'
 
 [http_service]
-  internal_port = 8080
+  internal_port = 2785
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
