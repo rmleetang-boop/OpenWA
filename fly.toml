@@ -12,7 +12,7 @@ primary_region = 'ams'
   app = 'node ./dbsetup.js node dist/main'
 
 [[mounts]]
-  source = 'data'
+  source = 'openwa_data'
   destination = '/data'
   auto_extend_size_threshold = 80
   auto_extend_size_increment = '1GB'
