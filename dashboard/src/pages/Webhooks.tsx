@@ -134,9 +134,8 @@ export function Webhooks() {
     url: string;
     events: string[];
     sessionId: string;
-    secret: string;
     filters: WebhookFilters | null;
-  }>({ url: '', events: ['message.received'], sessionId: '', secret: '', filters: null });
+  }>({ url: '', events: ['message.received'], sessionId: '', filters: null });
   const [testingId, setTestingId] = useState<string | null>(null);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
@@ -163,12 +162,11 @@ export function Webhooks() {
         sessionId: newWebhook.sessionId,
         url: newWebhook.url,
         events: newWebhook.events,
-        secret: newWebhook.secret.trim() || undefined,
         // Don't persist message-filters when no message events are selected (the filter UI is hidden).
         filters: supportsFilters(newWebhook.events) ? newWebhook.filters : null,
       });
       setShowCreateModal(false);
-      setNewWebhook({ url: '', events: ['message.received'], sessionId: '', secret: '', filters: null });
+      setNewWebhook({ url: '', events: ['message.received'], sessionId: '', filters: null });
       setToast({ type: 'success', message: t('webhooks.toasts.created') });
     } catch (err) {
       setToast({
@@ -241,7 +239,6 @@ export function Webhooks() {
           url: editWebhook.url,
           events: editWebhook.events,
           active: editWebhook.active,
-          ...(editWebhook.secret?.trim() ? { secret: editWebhook.secret.trim() } : {}),
           // Clear message-filters if the edit removed all message events (the filter UI is hidden then).
           filters: supportsFilters(editWebhook.events) ? (editWebhook.filters ?? null) : null,
         },
@@ -355,15 +352,6 @@ export function Webhooks() {
             value={newWebhook.url}
             onChange={e => setNewWebhook({ ...newWebhook, url: e.target.value })}
           />
-          <label>{t('webhooks.secret')}</label>
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder={t('webhooks.secretPlaceholder')}
-            value={newWebhook.secret}
-            onChange={e => setNewWebhook({ ...newWebhook, secret: e.target.value })}
-          />
-          <p className="webhook-secret-hint">{t('webhooks.secretHint')}</p>
           <label>{t('webhooks.events')}</label>
           <div className="event-tags">
             {availableEventNames.map(name => {
@@ -414,15 +402,6 @@ export function Webhooks() {
             value={editWebhook.url}
             onChange={e => setEditWebhook({ ...editWebhook, url: e.target.value })}
           />
-          <label>{t('webhooks.secret')}</label>
-          <input
-            type="password"
-            autoComplete="new-password"
-            placeholder={t('webhooks.secretPlaceholder')}
-            value={editWebhook.secret ?? ''}
-            onChange={e => setEditWebhook({ ...editWebhook, secret: e.target.value })}
-          />
-          <p className="webhook-secret-hint">{t('webhooks.secretHint')}</p>
           <label>{t('webhooks.events')}</label>
           <div className="event-tags">
             {availableEventNames.map(name => {
