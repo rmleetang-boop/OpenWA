@@ -1,9 +1,10 @@
-# fly.toml app configuration file generated for openwa-app on 2026-08-20T19:35:20Z
+# fly.toml app configuration file generated for openwa-app on 2026-08-21T02:50:02Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
+
 app = 'openwa-app'
-primary_region = 'jnb'
+primary_region = 'ams'
 
 [build]
 
@@ -20,14 +21,24 @@ primary_region = 'jnb'
 [http_service]
   internal_port = 2785
   force_https = true
-  auto_stop_machines = false
+  auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 1
+  min_machines_running = 0
   processes = ['app']
 
 [[vm]]
-  memory = '2gb'
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256
+
+[[vm]]
+  memory = '512mb'
   size = 'shared-cpu-1x'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512
+  processes = ['app']
 
 [deploy]
   release_command = 'flyctl machine update 8576e6da1e4018 \   --app openwa-app \   --image registry.fly.io/openwa-app:deployment-3dbc5ab4e909238ee9bd535e2b7776be'
